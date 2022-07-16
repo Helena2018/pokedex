@@ -17,6 +17,9 @@ const colors = {
   normal: '#F5F5F5'
 }
 
+const main_types = Object.keys(colors)
+console.log(main_types)
+
 const fetchPokenmons = async () => {
   
   for(let i = 1; i <= poke_count; i++) {
