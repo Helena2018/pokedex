@@ -1,5 +1,5 @@
 const poke_container = document.getElementById('poke-container')
-const poke_count = 150
+const poke_count = 300
 const colors = {
   fire: '#FDDFDF',
   grass: '#DEFDE0',
@@ -18,8 +18,11 @@ const colors = {
 }
 
 const fetchPokenmons = async () => {
-  for(i = 1; i <= poke_count; i++) {
+  
+  for(let i = 1; i <= poke_count; i++) {
+
     await getPokemon(i)
+    console.log(i)
   }
 }
 
@@ -27,7 +30,30 @@ const getPokemon = async (id) => {
   const url = `https://pokeapi.co/api/v2/pokemon/${id}`
   const res = await fetch(url)
   const data = await res.json()
-  console.log(data)
+  createPokemonCard(data)
+}
+
+const createPokemonCard = (pokemon) => {
+  const pokemonEl = document.createElement('div')
+  pokemonEl.classList.add('pokemon')
+
+  const name = pokemon.name[0].toUpperCase() + pokemon.name.slice(1)
+  const id = pokemon.id.toString().padStart(3, '0')
+
+  const pokemonInnerHTML = `
+    <div class="pokemon" style="background-color: rgb(222, 253,224)">
+        <div class="img-container">
+          <img src="https://www.serebii.net/pokemon/art/${id}.png" alt="">
+        </div>
+        <div class="info">
+          <span class="number"># ${id}</span>
+          <h3 class="name">${name}</h3>
+          <small class="type">Type: <span>grass</span></small>
+        </div>
+      </div>
+  `
+  pokemonEl.innerHTML = pokemonInnerHTML
+  poke_container.appendChild(pokemonEl)
 }
 
 fetchPokenmons()
