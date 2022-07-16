@@ -18,14 +18,10 @@ const colors = {
 }
 
 const main_types = Object.keys(colors)
-console.log(main_types)
 
 const fetchPokenmons = async () => {
-  
   for(let i = 1; i <= poke_count; i++) {
-
     await getPokemon(i)
-    console.log(i)
   }
 }
 
@@ -45,18 +41,19 @@ const createPokemonCard = (pokemon) => {
 
   const poke_types = pokemon.types.map(type => type.type.name)
   const type = main_types.find(type => poke_types.indexOf(type) > -1)
+  const color = colors[type]
+
+  pokemonEl.style.backgroundColor = color
 
   const pokemonInnerHTML = `
-    <div class="pokemon" style="background-color: rgb(222, 253,224)">
         <div class="img-container">
           <img src="https://www.serebii.net/pokemon/art/${id}.png" alt="">
         </div>
         <div class="info">
           <span class="number"># ${id}</span>
           <h3 class="name">${name}</h3>
-          <small class="type">Type: <span>grass</span></small>
+          <small class="type">Type: <span>${type}</span></small>
         </div>
-      </div>
   `
   pokemonEl.innerHTML = pokemonInnerHTML
   poke_container.appendChild(pokemonEl)

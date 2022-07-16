@@ -55,7 +55,7 @@ h1 {
 }
 
 .pokemon .info .number {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   padding: 5px 10px;
   font-size: 0.8em;
